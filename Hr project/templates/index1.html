@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Attrition</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.btn { display: inline-block; display: inline; zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; margin-left: .3em; }
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; }
+.btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+.btn:hover { color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; }
+.btn-primary, .btn-primary:hover { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); color: #ffffff; }     
+.btn-primary.active { color: rgba(255, 255, 255, 0.75); }
+.btn-primary { background-color: #4a77d4; background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); background-image: linear-gradient(top, #6eb6de, #4a77d4); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  border: 1px solid #3762bc; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); }
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
+.btn-block { width: 100%; display:block; }
+
+body { 
+	width: 100%;
+	height:auto;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	font-size: 18px;
+	text-align:center;
+	letter-spacing:1.2px;
+}
+.hidden {
+    display: none;
+}
+
+	
+
+.login {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+ h1 {
+      text-align: center;
+      color: rgb(255, 0, 0);
+      text-transform: uppercase;
+      font-size: 40px;
+      text-shadow: 2px 2px 4px black;
+      animation: bounceIn 2s infinite alternate;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+
+      60% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      background: rgb(255, 255, 255);
+      border: none;
+      outline: none;
+      padding: 15px;
+      font-size: 13px;
+      color: #000000;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+      border: 3px solid greenyellow;
+      border-radius: 20px;
+      box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+      -webkit-transition: box-shadow .5s ease;
+      -moz-transition: box-shadow .5s ease;
+      -o-transition: box-shadow .5s ease;
+      -ms-transition: box-shadow .5s ease;
+      transition: box-shadow .5s ease;
+    }
+
+    input:hover {
+      background: rgba(0, 0, 0, 1);
+      font-size: 15px;
+      color: white;
+      border: #670d10 5px solid;
+    }
+
+    input:focus {
+      box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+.form-input{
+  width: 100%;
+  margin-bottom: 10px;
+  background: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-size: 13px;
+  color: #000000;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border: 3px solid greenyellow;
+  border-radius: 20px;
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+  -webkit-transition: box-shadow .5s ease;
+  -moz-transition: box-shadow .5s ease;
+  -o-transition: box-shadow .5s ease;
+  -ms-transition: box-shadow .5s ease;
+  transition: box-shadow .5s ease;
+}
+.form-input:hover {
+  background: rgba(0, 0, 0, 1);
+  font-size: 15px;
+  color: white;
+  border: #670d10 5px solid;
+}
+
+.form-input:focus {
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+.login-container {
+  text-align: center;
+}
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #4a77d4; /* Adjust the color as needed */
+  color: #ffffff;
+  margin: 5px;
+  cursor: pointer;
+}
+.next-button{
+  margin-right: auto;
+}
+.results{
+  color:black;
+}
+.prev-button{
+  margin-left: auto;
+}
+.navbar {
+  background: linear-gradient(to bottom, #0248d4, #fbfdff);
+}
+
+.navbar-nav {
+  text-align: center;
+  width: 100%;
+}
+
+.nav-item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+</style>
+<script>
+  let currentGroup = 1;
+
+  function showGroup(groupNumber) {
+      const currentGroupElement = document.querySelector(`.input-group:nth-child(${currentGroup})`);
+      const targetGroupElement = document.querySelector(`.input-group:nth-child(${groupNumber})`);
+
+      if (currentGroupElement && targetGroupElement) {
+          currentGroupElement.classList.add('hidden');
+          targetGroupElement.classList.remove('hidden');
+          currentGroup = groupNumber;
+      }
+  }
+
+  function showNext() {
+      const nextGroup = currentGroup + 1;
+      showGroup(nextGroup);
+  }
+
+  function showPrev() {
+      const previousGroup = currentGroup - 1;
+      if (previousGroup > 0) {
+          showGroup(previousGroup);
+      }
+  }
+
+</script>
+
+  
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span> Employee Attrition
+    </button>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="{{ url_for('empattrition')}}" class="nav-link">Employee Attrition</a></li>
+        <li class="nav-item active"><a href="http://127.0.0.1:5000/" class="nav-link">SVM Prediction</a></li>
+        <li class="nav-item"><a href="{{ url_for('analysis1') }}" class="nav-link">Analysis</a></li>
+        <li class="nav-item"><a href="{{ url_for('decision_tree') }}" class="nav-link">Decision Tree</a></li>
+        <li class="nav-item"><a href="{{ url_for('show_models') }}" class="nav-link">ML Models</a></li>
+        <li class="nav-item"><a href="{{ url_for('dt') }}" class="nav-link">Attrition by high performance</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<h1> EMPLOYEE ATTRITION PREDICTION </h1>
+ <div class="login">
+  <form action="{{ url_for('predict') }}" method="post">
+      <div class="input-group">
+        <input class="form-input" type="text" name="age" placeholder="Enter Age: eg. 45"><br>
+        <select name="travelclass" class="form-input">
+            <option value="" disabled selected>Enter Travel Class:</option>
+            <option value="0">No Travel</option>
+            <option value="1">Travel Frequently</option>
+            <option value="2">Travel Rarely</option>
+        </select><br>
+          <select name="department" class="form-input">
+              <option value="" disabled selected>Select Department</option>
+              <option value="2">Sales</option>
+              <option value="1">Research & Development</option>
+              <option value="0">Human Resources</option>
+          </select><br>
+        <input class="form-input" type="text" name="distance" placeholder="Enter Distance from home in kms: eg. 8"><br>
+        <input class="form-input" type="text" name="edulvl" placeholder="Enter Educational level: eg. 1-5"><br>
+        <select name="edufield" class="form-input">
+          <option value="" disabled selected>Select Educational Field</option>
+          <option value="0">Human Resources</option>
+          <option value="1">Life Sciences</option>
+          <option value="2">Marketing</option>
+          <option value="3">Medical</option>
+          <option value="4">Other</option>
+          <option value="5">Technical Degree</option>
+      </select>
+        <input class="form-input" type="text" name="envsatis" placeholder="Enter Environmental Satisfaction Level: eg. 1-4"><br>
+        <select name="gender" class="form-input">
+          <option value="" disabled selected>Select Gender</option>
+          <option value="0">Female</option>
+          <option value="1">Male</option>
+      </select>
+        <input class="form-input" type="text" name="jobinvolvement" placeholder="Enter Job Involvement: eg. 1-4"><br>
+        <button type="button" class="btn-circle prev-button" onclick="showNext()">&gt;</button>
+      </div>
+      <div class = "input-group hidden">
+        <input class="form-input" type="text" name="joblvl" placeholder="Enter Job Level: eg. 1-5"><br>
+        <select name="jobrole" class="form-input">
+          <option value="" disabled selected>Select Job Role</option>
+          <option value="0">Healthcare Representative</option>
+          <option value="1">Human Resources</option>
+          <option value="2">Laboratory Technician</option>
+          <option value="3">Manager</option>
+          <option value="4">Manufacturing Director</option>
+          <option value="5">Research Director</option>
+          <option value="6">Research Scientist</option>
+          <option value="7">Sales Executive</option>
+          <option value="8">Sales Representative</option>
+      </select>
+        <input class="form-input" type="text" name="jobsatis" placeholder="Enter Job Satisfaction Level: eg. 1-4"><br>
+        <select name="maritalsatus" class="form-input">
+          <option value="" disabled selected>Select Marital Status</option>
+          <option value="0">Divorced</option>
+          <option value="1">Married</option>
+          <option value="2">Single</option>
+      </select>
+        <input class="form-input" type="text" name="nocompanies" placeholder="Enter no of Companies worked: eg. 2"><br>
+        <select name="overtime" class="form-input">
+          <option value="" disabled selected>Select Overtime</option>
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+      </select>
+        <input class="form-input" type="text" name="performancerat" placeholder="Enter Employee Performance Rating: eg. 1-4"><br>
+        <input class="form-input" type="text" name="relationshiplvl" placeholder="Enter Relationship Satisfaction Level: eg. 1-4"><br> 
+        <input class="form-input" type="text" name="stockoption" placeholder="Enter Stock Option Level:  eg. 0-3"><br>
+        <button type="button" class="btn-circle next-button" onclick="showPrev()">&lt;</button>
+        <button type="button" class="btn-circle prev-button" onclick="showNext()">&gt;</button>
+      </div>
+      <div class="input-group hidden">
+        <input class="form-input" type="text" name="experience" placeholder="Enter Total Work Experience: eg. 10"><br>
+        <input class="form-input" type="text" name="trainingtime" placeholder="Enter Training time last year: eg. 0-6"><br>
+        <input class="form-input" type="text" name="worklifebal" placeholder="Enter Level of Worklife Balance eg. 1-4"><br>
+        <input class="form-input" type="text" name="yearsworked" placeholder="Enter years of company worked: eg. 30"><br>
+        <input class="form-input" type="text" name="yrsincurrole" placeholder="Enter years in current role: eg. 5"><br>
+        <input class="form-input" type="text" name="yrsperformance" placeholder="Enter years since last promotion: eg. 5"><br>
+        <input class="form-input" type="text" name="yrscurmanager" placeholder="Enter years with current manager: eg. 4"><br>
+        <input class="form-input" type="text" name="salary" placeholder="Enter Monthly Income: eg. 20000"><br>
+        <input class="form-input" type="text" name="percenthike" placeholder="Enter Percent of Salary Hike eg. 15"><br>
+        <button type="button" class="btn-circle next-button" onclick="showPrev()">&lt;</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+      </div>
+    </form>
+
+  </div>
+  <div class="results">
+    <p>{{ prediction_text }}</p>
+  </div>
+	<br>
+  <br>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+</body>
+</html>

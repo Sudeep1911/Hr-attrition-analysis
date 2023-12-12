@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Attrition</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+body { 
+	width: 100%;
+	height:auto;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	font-size: 18px;
+	text-align:center;
+	letter-spacing:1.2px;
+}
+
+	
+
+ h1 {
+      text-align: center;
+      color: rgb(255, 0, 0);
+      text-transform: uppercase;
+      font-size: 40px;
+      text-shadow: 2px 2px 4px black;
+      animation: bounceIn 2s infinite alternate;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.1);
+          opacity: 0;
+        }
+
+        60% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+.navbar {
+  background: linear-gradient(to bottom, #0248d4, #fbfdff);
+}
+
+.navbar-nav {
+  text-align: center;
+  width: 100%;
+}
+
+.nav-item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+#decisionTreeImage {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below the image */
+    margin: 0 auto; /* Center the image */
+  }
+</style>
+<script>
+
+</script>
+
+  
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span> Employee Attrition
+    </button>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="{{ url_for('empattrition')}}" class="nav-link">Employee Attrition</a></li>
+        <li class="nav-item"><a href="http://127.0.0.1:5000/" class="nav-link">SVM Prediction</a></li>
+        <li class="nav-item"><a href="{{ url_for('analysis1') }}" class="nav-link">Analysis</a></li>
+        <li class="nav-item active"><a href="{{ url_for('decision_tree') }}" class="nav-link">Decision Tree</a></li>
+        <li class="nav-item"><a href="{{ url_for('show_models') }}" class="nav-link">ML Models</a></li>
+        <li class="nav-item"><a href="{{ url_for('dt') }}" class="nav-link">Attrition by high performance</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<h1> EMPLOYEE ATTRITION DECISION TREE </h1>
+<img id="decisionTreeImage" src="{{ decision_tree_image_path }}" alt="Decision Tree">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+</body>
+</html>

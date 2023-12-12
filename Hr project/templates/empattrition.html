@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Attrition</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+  width: 100%;
+  height: auto;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 1.2px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header styles */
+header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+	
+
+h1 {
+  color: #007bff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 40px;
+  text-shadow: 2px 2px 4px black;
+  animation: bounceIn 2s infinite alternate;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+
+      60% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+.navbar {
+  background: linear-gradient(to bottom, #0248d4, #fbfdff);
+}
+
+.navbar-nav {
+  text-align: center;
+  width: 100%;
+}
+
+.nav-item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul{
+  color:#007bff;
+}
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+section {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#content-container {
+  display: flex;
+}
+#problemstate{
+  display:flex;
+}
+#tools{
+  display:flex;
+}
+#summ{
+  display:flex;
+}
+#contents{
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#ibm{
+  margin-left:200px;
+  margin-top:300px;
+}
+#contents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#contents li {
+  margin-bottom: 10px; /* Add margin between list items for better spacing */
+}
+
+#contents a {
+  text-decoration: none; /* Remove underlines from links */
+  color: #333; /* Set the link color */
+}
+#section-summary{
+  margin-right:50px;
+}
+
+#contents a:hover {
+  text-decoration: underline; /* Underline on hover */
+  color: #000; /* Set the link color on hover */
+}
+#attri {
+  margin-left: 50px; /* Adjust the margin as needed */
+  margin-top:150px;
+  margin-right:45px;
+}
+#att{
+  margin-left: 250px;
+  margin-top:150px;
+}
+#section-tools{
+  width:62%;
+}
+#analysis{
+  margin-right:50px;
+  margin-top:50px;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+#section-problem{
+  margin-left:250px;
+}
+h1 {
+    color: #007bff;
+}
+
+p {
+    line-height: 1.6;
+    text-align:left;
+}
+ol{
+  text-align:left;
+}
+</style>
+
+  
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a href="{{ url_for('empattrition')}}" class="nav-link">Employee Attrition</a></li>
+        <li class="nav-item"><a href="http://127.0.0.1:5000/" class="nav-link">SVM Prediction</a></li>
+        <li class="nav-item"><a href="{{ url_for('analysis1') }}" class="nav-link">Analysis</a></li>
+        <li class="nav-item"><a href="{{ url_for('decision_tree') }}" class="nav-link">Decision Tree</a></li>
+        <li class="nav-item"><a href="{{ url_for('show_models') }}" class="nav-link">ML Models</a></li>
+        <li class="nav-item"><a href="{{ url_for('dt') }}" class="nav-link">Attrition by high performance</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<h1> EMPLOYEE ATTRITION</h1>
+<div id="contents">
+  <h2>Contents</h2>
+  <ul >
+      <li><a href="#section-attrition">What is Attrition?</a></li>
+      <li><a href="#section-problem">Problem Statement</a></li>
+      <li><a href="#section-tools">Tools Used</a></li>
+      <li><a href="#section-summary">Summary</a></li>
+  </ul>
+</div>
+<div id='content-container'>
+  <section id='section-attrition'>
+    <h2>What is Attrition?</h2>
+    <p>Employee attrition is the natural process by which employees leave the workforce. It can occur due to
+        retirement, voluntary or involuntary reasons, lack of professional growth, hostile work environment, or
+        declining confidence in the company's market value.</p>
+  
+    <h3>Types of Attrition:</h3>
+    <ol>
+        <li>Attribution due to retirement</li>
+        <li>Voluntary attribution</li>
+        <li>Involuntary attribution</li>
+        <li>Internal attribution</li>
+        <li>Demographic-specific attribution</li>
+        <li>Lack of professional growth</li>
+        <li>Hostile work environment</li>
+        <li>Declining confidence in the company’s market value</li>
+        <li>Weak leadership</li>
+    </ol>
+  
+    <h3>Attrition Measures:</h3>
+    <p>Attrition measures how many people left a company/office/department compared to the average number of people
+        employed in that year.</p>
+  
+    <h3>Example:</h3>
+    <p>Employee started new year - 1000<br>
+        People leave - 200<br>
+        Hired new people - 400<br>
+        Final head count in a year - 1400<br>
+        Average number of employees - (1000 + 1400) / 2 = 1200<br>
+        Attrition rate = (200 / 1200) * 100 = 16.66%</p>
+  </section>
+  <div id="attri">
+    <img src=https://www.aihr.com/wp-content/uploads/High-employee-turnover.jpg width='800px'>
+  </div>
+
+</div>
+
+<div id='problemstate'>
+  <div id='ibm'>
+    <img src=static/ibm.jpg width='600px'>
+  </div>
+  <section id='section-problem'>  
+      <h2>Problem Statement</h2>
+      <p>Predicting employee attrition using supervised learning.</p>
+
+      <h2>Scope of Project</h2>
+      <p>The project focuses on leveraging machine learning, particularly supervised learning techniques, to analyze and predict employee attrition within organizations. Recognizing the significance of human resources in driving competitive advantages, the aim is to move beyond subjective decision-making in HR management and utilize objective data analysis.</p>
+
+      <p>By examining various factors that influence employee attrition, the goal is to identify the primary causes behind employees leaving a company and create a predictive model to forecast whether a particular employee might depart. Using a real dataset provided by IBM analytics, comprising approximately 1470 samples and 35 features, the project employs machine learning algorithms for training and testing.</p>
+
+      <p>Through this analysis, the project demonstrates the utility of ML-driven predictive models in HR decision-making, allowing organizations to proactively address employee retention based on data-driven insights.</p>
+
+      <h2>About Dataset</h2>
+      <p>Dataset: <a href="https://www.kaggle.com/datasets/rv1922/employee-data-attrition">Employee Data
+              Attrition</a></p>
+
+      <p>The dataset comprises 1470 records with 35 features, among which 26 are numerical attributes and 9 are categorical attributes. Within the numerical attributes, some fields store categorical information represented by numerical labels. To facilitate comprehensive analysis, these numerical labels will be substituted with corresponding categorical values. This data structure presents an opportunity to enhance the interpretability of the dataset by transforming certain numeric representations into more meaningful categorical labels.</p>
+  </section>
+</div>
+<div id='tools'>
+  <section id='section-tools'>
+    <h2>Tools Used</h2>
+    <ol>
+      <li>Google Collab</li>
+      <li>Jupyter notebook</li>
+      <li>Power bi</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>Java Script</li>
+      <li>Flask</li>
+      <li>Dash</li>
+      </ol>
+
+    <h2>Machine Learning Algorithms</h2>
+    <ol>
+        <li>Logistic Regression</li>
+        <li>Random Forest</li>
+        <li>Support Vector Machine</li>
+        <li>Decision Tree</li>
+    </ol>
+  </section>
+  <div id='analysis'>
+    <img src='https://learn.g2.com/hubfs/Imported%20sitepage%20images/1ZB5giUShe0gw9a6L69qAgsd7wKTQ60ZRoJC5Xq3BIXS517sL6i6mnkAN9khqnaIGzE6FASAusRr7w=w1439-h786.png' width='800px'>
+  </div>
+</div>
+
+<div id='summ'>
+  <div id='att'>
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Y342chdqJyB8XjQYZ2mHmPPzP6xf4QesOg&usqp=CAU' width='500px'>
+  </div>
+  <section id='section-summary'>
+    <h2>Summary</h2>
+    <p>The organization experiences an overall employee attrition rate of 16.12%. Notably, male employees
+        constitute a larger segment than females by over 20%, despite which the attrition rate among males
+        surpasses that of females.</p>
+
+    <p>Most employees fall within the age range of 30 to 40, showing a decreasing attrition trend with increasing
+        age. Employees who travel frequently exhibit higher attrition rates, while non-travelers experience the
+        lowest. The Research & Development department has the highest employee count but the lowest attrition rate
+        among all departments.</p>
+
+    <p>Machine Learning Models Performance:</p>
+    <ul>
+        <li>Logistic Regression: Accuracy - 86.73%, Precision - 43.37%, Recall - 50%</li>
+        <li>Random Forest: Accuracy - 87.75%, Precision - 83.94%, Recall - 54.93%</li>
+        <li>Support Vector Machines (SVM): Accuracy - 86.73%, Precision - 43.37%, Recall - 50%</li>
+    </ul>
+
+    <p>All models displayed strengths and weaknesses in identifying positive and negative instances. Further
+        analysis and potential model optimization could enhance their capabilities, especially in correctly
+        identifying positive instances.</p>
+  </section>
+<div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+</body>
+</html>

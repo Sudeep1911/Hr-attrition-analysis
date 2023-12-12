@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Attrition</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+body { 
+	width: 100%;
+	height:auto;
+	font-family: 'Open Sans', sans-serif;
+	color: black
+	font-size: 18px;
+	text-align:center;
+	letter-spacing:1.2px;
+}
+
+	
+
+ h1 {
+      text-align: center;
+      color: rgb(255, 0, 0);
+      text-transform: uppercase;
+      font-size: 40px;
+      text-shadow: 2px 2px 4px black;
+      animation: bounceIn 2s infinite alternate;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.1);
+          opacity: 0;
+        }
+
+        60% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+.navbar {
+  background: linear-gradient(to bottom, #0248d4, #fbfdff);
+}
+
+.navbar-nav {
+  text-align: center;
+  width: 100%;
+}
+
+.nav-item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+#image{
+    display:flex;
+}
+#picture{
+    margin-left:25px;
+}
+h3{
+    text-align:center;
+}
+#inference{
+    margin-left:50px;
+    margin-right:50px;
+}
+button{
+  background-color:transparent;
+  border:none;
+}
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+</style>
+
+<script>
+  function showPopup(popUpNumber) {
+      // Set the content of the popup based on the pop-up number
+      var popupContent = '';
+
+      // Load different content for each pop-up
+      if (popUpNumber === 1) {
+          popupContent = '<div style="display:flex";><img src="static/roclr.png" alt="Image 1"><img src="static/featureslr.png" alt="Image 5"><div>';
+      } else if (popUpNumber === 2) {
+          popupContent = '<div style="display:flex";><img src="static/rocrf.png" alt="Image 2"><img src="static/featuresrf.png" alt="Image 6"><div>';
+      } else if (popUpNumber === 3) {
+          popupContent = '<div style="display:flex";><img src="static/rocsvm.png" alt="Image 3"><img src="static/featuressvm.png" alt="Image 7"><div>';
+      } else if (popUpNumber === 4) {
+          popupContent = '<div style="display:flex";><img src="static/rocdt.png" alt="Image 4"><img src="static/featuresdt.png" alt="Image 8"><div>';
+      }
+
+      // Set the content of the popup
+      document.getElementById('popupContent').innerHTML = popupContent;
+
+      // Show the popup
+      document.getElementById('popupContainer').style.display = 'block';
+  }
+
+  function hidePopup() {
+      // Hide the popup
+      document.getElementById('popupContainer').style.display = 'none';
+  }
+</script>
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span> Employee Attrition
+    </button>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="{{ url_for('empattrition')}}" class="nav-link">Employee Attrition</a></li>
+        <li class="nav-item"><a href="http://127.0.0.1:5000/" class="nav-link">SVM Prediction</a></li>
+        <li class="nav-item"><a href="{{ url_for('analysis1') }}" class="nav-link">Analysis</a></li>
+        <li class="nav-item"><a href="{{ url_for('decision_tree') }}" class="nav-link">Decision Tree</a></li>
+        <li class="nav-item"><a href="{{ url_for('show_models') }}" class="nav-link">ML Models</a></li>
+        <li class="nav-item active"><a href="{{ url_for('dt') }}" class="nav-link">Attrition by high performance</a></li>
+      </ul>
+    </div>
+  </nav>
+<h1> EMPLOYEE ATTRITION BY HIGH PERFORMANCE RATING </h1>
+<h3>Persons with high performance rating but are in position to leave the company with reasons</h3>
+<div>
+  <div id="table-container" style="width:1800px";>
+    {{ df.to_html(classes='table table-striped', index=False) | safe }}
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+</body>
+</html>
