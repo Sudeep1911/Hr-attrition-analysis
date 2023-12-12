@@ -1,6 +1,8 @@
 # Hr-attrition-analysis
  This study uses machine learning to predict and understand employee attrition, aiming to provide actionable insights for proactive human resource strategies based on diverse employee attributes.
+ 
 Tools used:
+
 i. Google Collab (Collaboratory): Google Collab is a cloud-based platform provided by Google that allows users to write and execute Python code in a Jupyter Notebook environment.
 
 ii. Jupyter Notebook: Jupyter Notebook is an open-source web application that enables interactive computing. It allows users to create and share documents containing live code, equations, visualizations, and explanatory text.
